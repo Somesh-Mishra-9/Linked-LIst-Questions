@@ -141,4 +141,93 @@ void deleteNode(struct node* node){
 
 }
 
+// Function to delete all the node of linked list.
+
+void destroy1(struct node* start){
+    if(start==NULL) return;
+
+    while(start!=NULL){
+        struct node* temp=start;
+        start=start->link;
+        free(temp);
+    }
+}
+
+
+void destroy2(struct node* start) {
+    for (struct node* temp = start; temp != NULL; start = temp) {
+        temp = temp->link;
+        free(start);
+    }
+}
+
+// Function to remove duplicates from an unsorted single linked list.
+
+struct node* removeDuplicatesUnsorted(struct node* start){
+
+    if(start==NULL|| start->link==NULL){
+        return start;
+    }
+
+    struct node* temp=NULL;
+
+    for(temp=start;temp->link!=NULL;temp=temp->link){
+        int key=temp->data;
+        struct node* ptr=NULL;
+        for(ptr=temp;ptr->link!=NULL;ptr=ptr->link){
+            struct node* t=ptr->link;
+
+            if(t->data==key){
+
+                if(t->link==NULL){
+                    ptr->link=NULL;
+                }
+
+                else{
+                    ptr->link=t->link;
+            
+                }
+                free(t);
+            }
+        }
+    }
+
+    return start;
+
+}
+
+// Removing duplicate elements from a sorted single linked list.
+
+struct node* removeDuplicatesSorted(struct node* start){
+    if(start==NULL||start->link==NULL){
+        return start;
+    }
+
+    struct node* temp=start;
+
+    while(temp->link!=NULL){
+        struct node* ptr=temp->link;
+        if(temp->data==ptr->data){
+            if(ptr->link==NULL){
+                temp->link=NULL;
+            }
+
+            else{
+                temp->link=ptr->link;
+            }
+
+            free(ptr);
+        }
+        else{
+        temp=temp->link;
+        }
+        
+    
+    }
+
+return start;
+}
+
+
+
 
